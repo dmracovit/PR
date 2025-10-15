@@ -109,6 +109,8 @@ _Docker Compose configuration and running containers_
 ![Server logs]![alt text](img/image9.png)
 _Server logs showing HTTP requests and responses_
 
+!File directories on server ![alt text](img/image10.png)
+
 ---
 
 ## Test Results
