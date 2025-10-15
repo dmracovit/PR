@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My PDF Library - PR Lab 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .intro {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .books-section {
+            margin-top: 40px;
+        }
+        
+        .books-section h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .book-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .book-card a {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: bold;
+            font-size: 1.1em;
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .book-card a:hover {
+            color: #667eea;
+        }
+        
+        .book-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .subdirectory-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .subdirectory-link:hover {
+            background: #764ba2;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f0f0f0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 My Digital Library</h1>
+            <p class="subtitle">PR Lab 1 - HTTP File Server</p>
+        </header>
+        
+        <div class="content">
+            <img src="library.png" alt="Library" class="hero-image">
+            
+            <p class="intro">
+                Welcome to my personal digital library! This HTTP file server was built from scratch 
+                using Python and TCP sockets. Browse through my collection of PDFs and explore 
+                nested directories.
+            </p>
+            
+            <div class="books-section">
+                <h2>📖 Featured Documents</h2>
+                <div class="book-grid">
+                    <div class="book-card">
+                        <div class="book-icon">📄</div>
+                        <a href="doc.pdf">Sample Document</a>
+                        <p style="color: #666; margin-top: 10px; font-size: 0.9em;">A test PDF file</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="books-section">
+                <h2>📂 Browse More Collections</h2>
+                <a href="books/" class="subdirectory-link">
+                    📚 Browse Books Subdirectory →
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>PR Laboratory Work 1 - FAF-23x | Built with ❤️ using Python & TCP Sockets</p>
+        </footer>
+    </div>
+</body>
+</html>

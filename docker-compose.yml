@@ -1,0 +1,18 @@
+services:
+  http-server:
+    build: .
+    container_name: pr-lab1-server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./www:/app/www:ro
+      - ./downloads:/app/downloads
+    command: python server.py /app/www 8000
+    networks:
+      - lab1-network
+    stdin_open: true
+    tty: true
+
+networks:
+  lab1-network:
+    driver: bridge
