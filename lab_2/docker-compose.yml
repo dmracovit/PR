@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  http-server:
+    build: .
+    container_name: http-server-lab2
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./content:/srv/site:ro
+      - ./src:/app:ro
+    restart: unless-stopped
