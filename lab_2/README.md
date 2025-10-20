@@ -93,12 +93,11 @@ with counter_lock:
 
 ## Part 3: Rate Limiting
 
-### Spamming Requests
-
+### Test: Single Client Spamming
 
 **Configuration:**
-- Client A (Spammer): 50 requests at 10 req/s
-- Client B (Normal): 20 requests at 4 req/s
+- Rate limit: 5 req/s per IP
+- Test: 30 requests at 10 req/s (double the limit)
 
 **Screenshot:**
 
@@ -110,13 +109,11 @@ with counter_lock:
 
 ### Response Statistics
 
-**Client A (Spammer) - 10 req/s:**
-- Successful (200): ~10-15%
-- Rate limited (429): ~85-90%
+**Single Client - 10 req/s (exceeds 5 req/s limit):**
+- Successful (200): ~50%
+- Rate limited (429): ~50%
 
-**Client B (Normal) - 4 req/s:**
-- Successful (200): >80%
-- Rate limited (429): ~20%
+**Interpretation:** Client attempts 10 req/s but limit is 5 req/s, so approximately half the requests are blocked with 429 responses.
 
 ---
 
