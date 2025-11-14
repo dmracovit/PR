@@ -346,6 +346,23 @@ export class Board {
     playerId: string,
     playerState: PlayerState
   ): Promise<void> {
+    // First, always turn down ALL uncontrolled face-up cards before starting a new turn
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        const row = this.grid[r];
+        assert(row !== undefined, `grid[${r}] must be defined`);
+        const space = row[c];
+        assert(space !== undefined, `grid[${r}][${c}] must be defined`);
+        
+        // Turn down any face-up card that is not controlled by anyone
+        if (space.card !== null && space.faceUp && space.controlledBy === null) {
+          space.faceUp = false;
+          this.notifyWaiters(r, c);
+        }
+      }
+    }
+    
+    // Then handle this player's previous play if they had one
     if (playerState.secondCard === null) {
       return; // No previous play to finish
     }
@@ -363,6 +380,7 @@ export class Board {
       }
     } else {
       // RULE 3-B: Turn non-matching cards face down if not controlled
+      // (This is redundant with the loop above, but kept for rule clarity)
       if (first !== null) {
         this.turnDownIfNotControlled(first.row, first.col, playerId);
       }
@@ -375,6 +393,9 @@ export class Board {
     playerState.firstCard = null;
     playerState.secondCard = null;
     playerState.matched = false;
+    
+    // Notify watchers that board changed
+    this.notifyChangeListeners();
   }
 
   /**
@@ -451,11 +472,12 @@ export class Board {
         firstSpace !== undefined,
         `firstSpace must be defined before relinquishing control`
       );
-      firstSpace.controlledBy = null; // Relinquish first card
+      firstSpace.controlledBy = null; // Relinquish first card (stays face-up but uncontrolled)
       if (first !== null) {
         this.notifyWaiters(first.row, first.col);
       }
       playerState.firstCard = null;
+      this.notifyChangeListeners(); // Notify that board changed
       throw new Error(`no card at (${row},${col})`);
     }
 
@@ -465,11 +487,12 @@ export class Board {
         firstSpace !== undefined,
         `firstSpace must be defined before relinquishing control`
       );
-      firstSpace.controlledBy = null; // Relinquish first card
+      firstSpace.controlledBy = null; // Relinquish first card (stays face-up but uncontrolled)
       if (first !== null) {
         this.notifyWaiters(first.row, first.col);
       }
       playerState.firstCard = null;
+      this.notifyChangeListeners(); // Notify that board changed
       throw new Error(
         `card at (${row},${col}) is controlled by another player`
       );
